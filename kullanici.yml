@@ -1,0 +1,14 @@
+---
+- name: Kullanıcı oluşturma
+  hosts: all
+  become: true
+
+  vars:
+    yeni_kullanici: personel
+
+  tasks:
+    - name: Kullanıcıyı oluştur
+      ansible.builtin.user:
+        name: "{{ yeni_kullanici }}"
+        state: present
+

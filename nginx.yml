@@ -1,0 +1,24 @@
+---
+
+- name: Nginx kurulumu, web sayfası aktarma ve servis başlatma
+  hosts: all
+  become: true
+
+  tasks:
+    - name: Nginx'i kur
+      ansible.builtin.apt:
+        name: nginx
+        state: present
+        update_cache: true
+        cache_valid_time: 3600
+
+    - name: Web sayfasına yaz
+      ansible.builtin.copy:
+        content: "<h1>Merhaba, ben {{ inventory_hostname }}</h1>\n"
+        dest: /var/www/html/index.html
+
+    - name: Nginx servisini başlat
+      ansible.builtin.service:
+        name: nginx
+        state: started
+        enabled: true

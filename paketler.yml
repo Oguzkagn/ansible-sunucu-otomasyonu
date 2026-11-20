@@ -1,0 +1,17 @@
+---
+- name: Paket yükle
+  hosts: all
+  become: true
+
+  vars:
+      paketler:
+      - curl
+      - git
+      - htop
+      - vim
+
+  tasks:
+    - name: Paketleri kur
+      ansible.builtin.apt:
+        name: "{{ paketler }}"
+        state: present
